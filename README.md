@@ -1,6 +1,6 @@
 # Aryavarta
 
-A 3D web game built with Vite and Three.js. Acts as the entry point for the Aryavarta website[Aryavarta repo link](https://github.com/ssuhanii/AryavartaWebsite)
+A 3D web game built with Vite and Three.js. Acts as the entry point for the [Aryavarta website](https://github.com/ssuhanii/AryavartaWebsite)
 
 ## 🚀 Quick Start
 
@@ -40,7 +40,7 @@ web-game/
 
 This game serves as an entry point that leads to the main website running on a different localhost port. The main website contains all interactive maps and other learning features.
 
-The main website is hosted in the **AryavartaWebsite** repository[Link to repo](https://github.com/ssuhanii/AryavartaWebsite).
+The main website is hosted in the [**AryavartaWebsite** repository](https://github.com/ssuhanii/AryavartaWebsite).
 
 ```bash
 # Build for production
