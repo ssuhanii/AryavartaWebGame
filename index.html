@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryavarta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .door-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #2c1810, #4a2c1a);
+            display: flex;
+            cursor: pointer;
+            transition: all 0.8s ease;
+        }
+
+        .door-left, .door-right {
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            border: 8px solid #654321;
+            position: relative;
+            transition: transform 1.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .door-left {
+            border-right: 4px solid #654321;
+        }
+
+        .door-right {
+            border-left: 4px solid #654321;
+        }
+
+        /* Door handles */
+        .door-handle {
+            position: absolute;
+            width: 20px;
+            height: 60px;
+            background: #DAA520;
+            border-radius: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .door-left .door-handle {
+            right: 30px;
+        }
+
+        .door-right .door-handle {
+            left: 30px;
+        }
+
+        /* Door panels decoration */
+        .door-panel {
+            width: 80%;
+            height: 80%;
+            border: 4px solid #654321;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #A0522D, #8B4513);
+        }
+
+        /* Animation states */
+        .doors-opening .door-left {
+            transform: translateX(-100%);
+        }
+
+        .doors-opening .door-right {
+            transform: translateX(100%);
+        }
+
+        .click-hint {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #DAA520;
+            font-size: 1.2rem;
+            background: rgba(44,24,16,0.92);
+            padding: 8px 28px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #0006;
+            text-align: center;
+            z-index: 20;
+            animation: pulse 2s infinite;
+            pointer-events: none; /* ensures user click goes to the door */
+            width: max-content;
+            max-width: 80vw;
+        }
+    </style>
+</head>
+<body>
+    <!-- Double Door Entrance -->
+    <div class="door-container" id="doorContainer">
+        <div class="door-left">
+            <div class="door-panel"></div>
+            <div class="door-handle"></div>
+        </div>
+        <div class="door-right">
+            <div class="door-panel"></div>
+            <div class="door-handle"></div>
+        </div>
+        <div class="click-hint">Click to Enter</div>
+    </div>
+
+    <script>
+        const doorContainer = document.getElementById('doorContainer');
+
+        doorContainer.addEventListener('click', function() {
+            // Add opening animation
+            doorContainer.classList.add('doors-opening');
+            
+            // After door animation ends, hide doors and go to welcome selection directly
+            setTimeout(() => {
+                doorContainer.style.display = 'none';
+                // Directly redirect to /game.html where your welcome selection overlay is implemented
+                window.location.href = '/game.html';
+            }, 1200); // Wait for door animation to complete
+        });
+    </script>
+</body>
+</html>

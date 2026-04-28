@@ -1,0 +1,242 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Web Game</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+
+    /* NPC / Shrine overlays */
+    .popup-box {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fffae3;
+      color: #412600;
+      border-radius: 12px;
+      border: 2px solid #654321;
+      box-shadow: 0 6px 16px #3332;
+      padding: 28px;
+      min-width: 320px;
+      z-index: 100;
+      font-size: 1.1em;
+      display: none;
+      font-family: Arial, sans-serif;
+      transition: all 0.2s;
+    }
+    .popup-box button {
+      background: #daa520;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 20px;
+      margin: 18px 6px 0 0;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .popup-box b {
+      color: #8B4513;
+    }
+  </style>
+</head>
+<body>
+  <div id="npc-dialog" class="popup-box">
+    <b>Elder:</b> Welcome, explorer! Learn about King Ashoka using the map. Then return for your reward.<br>
+    <button onclick="closeNpcDialog()">Got it!</button>
+  </div>
+  <div id="quiz-popup" class="popup-box">
+    <b>Quiz Shrine:</b><br>
+    Want to know how much you know about our indigenous rulers?<br>
+    Let's quiz your knowledge.<br><br>
+    <button onclick="goToQuiz()">Take the Quiz</button>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+  <script>
+    function closeNpcDialog() {
+      document.getElementById('npc-dialog').style.display = "none";
+    }
+    function goToQuiz() {
+      window.location.href = "http://localhost:3000/quiz";
+    }
+  </script>
+</body>
+</html>
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AaryaVarta</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+    .popup-box, #start-game-overlay {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f9f6ec;
+      border-radius: 12px;
+      border: 3px solid #886535;
+      box-shadow: 0 6px 20px #4444;
+      padding: 24px;
+      min-width: 380px;
+      z-index: 9999;
+      font-family: Georgia, serif;
+      color: #593d00;
+      display: none;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+    .popup-box button, #start-game-overlay button, #entry-overlay button {
+      background: #baa04a;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 26px;
+      margin: 16px 12px 0 12px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 1px 2px 6px #786527bb;
+      transition: background 0.3s ease;
+    }
+    .popup-box button:hover, #start-game-overlay button:hover, #entry-overlay button:hover {
+      background: #d8bb5e;
+    }
+
+    /* Custom ancient overlay style */
+    #entry-overlay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: url('bg.jpg') center center / cover no-repeat, #f5ecd7;
+      border: 14px solid #bfa05a;
+      box-shadow: 0 0 0 20px #bca66b55, 0 8px 40px #0009;
+    }
+    #entry-overlay-content {
+      background: rgba(240,220,185,0.97);
+      padding: 44px 40px 36px 40px;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px #7a642a44;
+      border: 3px solid #a68842;
+      max-width: 480px;
+    }
+    #entry-overlay-content .welcome-title {
+      font-family: 'Georgia', serif;
+      font-size: 2.2rem;
+      letter-spacing: 1.5px;
+      color: #553914;
+      font-variant: small-caps;
+      text-align: center;
+      margin-bottom: 18px;
+      text-shadow: 0 2px 8px #fffed9b2,0 1px 0 #a68842;
+    }
+    #entry-overlay-content .welcome-desc {
+      text-align:center;
+      font-family:'Georgia',serif;
+      font-size:1.25rem;
+      color:#4d3400;
+      margin-bottom:26px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Full-screen Ancient Overlay with Custom Background -->
+<div id="entry-overlay">
+  <div id="entry-overlay-content">
+    <div class="welcome-title">Welcome to Aryavarta!</div>
+    <div class="welcome-desc">Choose your path through ancient legends:</div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+      <button id="btn-enter-game" style="width: 80%; max-width: 320px;">Enter Aryavarta World</button>
+      <button id="btn-knowledge-tools" style="width: 80%; max-width: 320px;">Use Knowledge Tools</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Scroll-Style Start Overlay -->
+<div id="start-game-overlay" style="display:none;">
+  <p style="font-size:1.3rem; font-family:Georgia,serif;">
+    Welcome, noble explorer!<br>
+    Step into the ancient village of Aryavarta, where every path leads you deeper into the heritage and stories of our great rulers.<br>
+  </p>
+  <button id="start-game-btn">Start the Adventure</button>
+</div>
+
+<div id="npc-dialog" class="popup-box">
+  <b>Elder:</b> Welcome, explorer! Let us take a moment to learn about our great rulers.<br>
+  <button onclick="closeNpcDialog()">Let's go!</button>
+</div>
+
+<div id="npc-dialog-2" class="popup-box">
+  <b>Elder:</b> Want to dive deeper into the world of our rulers and their dynasties? Go explore our sources!<br>
+  <button onclick="closeNpcDialog2()">I Will!</button>
+</div>
+<div id="npc-dialog-3" class="popup-box">
+  <b>Village Sage:</b> Did you know: Our village is known for wise rulers from every era.<br> Go discover their stories.<br>
+  <button onclick="closeNpcDialog3()">On my way!</button>
+</div>
+<div id="npc-dialog-4" class="popup-box">
+  <b>Craftswoman:</b> Want to know about the beautiful architectures built in the reign of different rulers? Let's explore them!<br>
+  <button onclick="closeNpcDialog4()">Awesome!</button>
+</div>
+
+
+<div id="quiz-popup" class="popup-box">
+  <b>Quiz Shrine:</b><br>
+  Want to know how much you know about our indigenous rulers?<br>
+  Let's quiz your knowledge.<br><br>
+  <button onclick="goToQuiz()">Take the Quiz</button>
+</div>
+
+<script type="module" src="./main.js"></script>
+<script>
+  document.getElementById('btn-knowledge-tools').onclick = () => {
+    window.location.href = "http://localhost:3000/";
+  };
+  document.getElementById('btn-enter-game').onclick = () => {
+    document.getElementById('entry-overlay').style.display = 'none';
+    document.getElementById('start-game-overlay').style.display = 'flex';
+  };
+  document.getElementById('start-game-btn').onclick = () => {
+    document.getElementById('start-game-overlay').style.display = 'none';
+    window.gameStarted = true;
+  };
+
+  function closeNpcDialog() {
+    // home page yellow elder
+    window.location.href = "http://localhost:3000/";
+  }
+
+  function closeNpcDialog2() {
+    // sources page green elder
+    window.location.href = "http://localhost:3000/sources";
+  }
+
+  function closeNpcDialog3() {
+    // story page blue lady
+    window.location.href = "http://localhost:3000/storyline";
+  }
+
+  function closeNpcDialog4() {
+    // architectures page pink lady
+    window.location.href = "http://localhost:3000/";
+  }
+
+  function goToQuiz() {
+    window.location.href = "http://localhost:3000/quiz";
+  }
+</script>
+</body>
+</html>
